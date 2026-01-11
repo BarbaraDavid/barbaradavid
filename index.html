@@ -94,12 +94,13 @@
 
         /* --- SOBRE MÍ --- */
         #sobre-mi {
-            padding: 3rem 5%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
+    padding: 6rem 10%;
+    display: flex;        /* Cambiado de grid a flex */
+    justify-content: center;
+    text-align: center;   /* Centra el texto */
+    max-width: 800px;     /* Para que no se estire demasiado en web */
+    margin: 0 auto;
+}
 
         .img-perfil {
             width: 75%;
@@ -193,7 +194,6 @@
     </header>
 
     <section id="sobre-mi">
-        <div class="img-perfil"></div>
         <div class="content">
             <h2>Hilos con historia</h2>
             <p>Soy Bárbara David, y creo que los Quipus son la forma más pura de diseño abstracto que nuestra cultura nos ha regalado.</p>
@@ -419,20 +419,26 @@
 
         // Función para abrir el modal con datos dinámicos
         // Se llama así desde el HTML: onclick="openModal('Título', 'Descripción', 'URL-Imagen')"
-        function openModal(title, desc) {
-    document.getElementById("modalTitle").innerText = titulo;
-    document.getElementById("modalDescription").innerText = descripcion;
-    document.getElementById("myModal").style.display = "block";
-    document.body.style.overflow = "hidden"; // Bloquea scroll fondo
+
+function openModal(titulo, descripcion) {
+    // Asegúrate de que estos IDs existan en tu HTML
+    const modal = document.getElementById("myModal");
+    const titleElem = document.getElementById("modalTitle");
+    const descElem = document.getElementById("modalDescription");
+
+    if (modal && titleElem && descElem) {
+        titleElem.innerText = titulo;
+        descElem.innerText = descripcion;
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // Evita scroll al estar abierto
+    }
 }
 
-        // Función para cerrar el modal
-        function closeModal() {
-            modal.style.display = "none";
-            // Restaurar scroll
-            document.body.style.overflow = "auto";
-        }
-
+// Función para cerrar
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+    document.body.style.overflow = "auto";
+}
         // Evento para cerrar al hacer clic en la X
         if(closeBtn) {
             closeBtn.onclick = function() {
@@ -461,6 +467,7 @@
 </body>
 
 </html>
+
 
 
 
