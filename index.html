@@ -113,13 +113,19 @@
         /* --- GALERÍA --- */
         #obras { padding: 5rem 10%; background: #fff; }
         .grid-obras {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 100%), 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
+    display: grid;
+    /* En web intentará poner 2 o más, en móvil bajará a 1 automáticamente */
+    grid-template-columns: repeat(auto-fit, minmax(min(45%, 400px), 1fr));
+    gap: 2rem; /* Reducimos un poco el espacio para que quepan mejor */
+    margin-top: 3rem;
         }
 
-        .obra-card img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; transition: 0.5s; }
+        .obra-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4; /* Esto evita que las imágenes sean infinitamente largas */
+    object-fit: cover;
+}
         .obra-card:hover img { filter: grayscale(100%); }
         .obra-info h3 { font-family: 'Playfair Display', serif; margin-top: 1.5rem; font-size: 1.4rem; }
 
@@ -259,19 +265,33 @@
         }
 
         .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto; 
-            padding: 0;
-            border: 1px solid #888;
-            width: 75%; 
-            max-width: 900px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            position: relative;
-            border-radius: 4px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        }
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    width: 90%; /* En móviles ocupará casi todo el ancho */
+    max-width: 800px; /* En web no crecerá más de esto */
+    display: flex;
+    flex-direction: column; /* Apila imagen y texto en móvil */
+    gap: 20px;
+}
 
+/* Ajuste para la imagen dentro del modal */
+#modalImg {
+    width: 100%;
+    max-height: 70vh; /* Evita que la imagen sea más alta que la pantalla */
+    object-fit: contain; /* Muestra la imagen completa sin recortar */
+}
+
+/* Media query para pantallas grandes (Web) */
+@media (min-width: 768px) {
+    .modal-content {
+        flex-direction: row; /* Imagen a la izquierda, texto a la derecha */
+        align-items: center;
+    }
+    #modalImg {
+        width: 50%; /* La imagen toma la mitad del modal */
+    }
+}
         /* Botón de Cerrar (X) */
         .close-btn {
             color: #aaa;
@@ -442,4 +462,5 @@
 </body>
 
 </html>
+
 
